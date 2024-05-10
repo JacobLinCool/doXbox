@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+    doxbox:
+        image: jacoblincool/doxbox
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: ["/mnt/c"]
+        working_dir: /mnt
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix:ro
+            - ./config/dosbox-staging.conf:/root/.config/dosbox/dosbox-staging.conf
+            - .:/mnt
+        environment:
+            - DISPLAY=${DOSBOX_DISPLAY:-host.docker.internal:0}
